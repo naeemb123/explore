@@ -19,13 +19,13 @@ html, body {
 
 .recommendation-card{
     position: absolute;
-    bottom: 15%;
+    bottom: -60%;
     z-index: 99;
     height: 70%;
     background: white;
     left: 5%;
     width: 90%;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    transition: all 0.5s cubic-bezier(.25,.8,.25,1);
     padding: 20px;
 }
