@@ -41,11 +41,19 @@ function createMarker(place) {
     google.maps.event.addListener(marker, 'click', function() {
         $(".recommendation-card").css("bottom","15%");
         $(".recommendation-card").html(
-            "<h1>"+place.name+"</h1>" +
-            "<img class='place-image' src='"+place.photos[0].getUrl({'maxWidth': 1000, 'maxHeight': 300})+"' />"
+            ""
         );
-        infowindow.setContent(place.name);
-        infowindow.open(map, this);
+        if(place.photos){
+            $(".recommendation-card").append(
+                "<div class='image-wrapper'>" +
+                "<img class='place-image' src='"+place.photos[0].getUrl({'maxWidth': 1000, 'maxHeight': 300})+"'/>" +
+                "</div>" +
+                "<h1 class='place-name'>"+place.name+"</h1>"
+
+            );
+        }
+        // infowindow.setContent(place.name);
+        // infowindow.open(map, this);
     });
 
 }

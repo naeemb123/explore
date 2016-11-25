@@ -11,8 +11,8 @@ $(document).mouseup(function (e)
         && container.has(e.target).length === 0) // ... nor a descendant of the container
     {
         container.css("bottom","-60%");
+        $(".recommendation-card").html(
+            "<h1>Recommended Places</h1>"
+        );
     }
-    $(".recommendation-card").html(
-        "<h1>Recommended Places</h1>"
-    );
 });
