@@ -1,69 +1,45 @@
+// This example requires the Places library. Include the libraries=places
+// parameter when you first load the API. For example:
+// <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
 var map;
-var infoWindow;
-var service;
-
-
+var infowindow;
 
 function initMap() {
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 55.8642, lng: -4.2518},
-    zoom: 15,
-    styles: [{
-      stylers: [{ visibility: 'simplified' }]
-    }, {
-      elementType: 'labels',
-      stylers: [{ visibility: 'off' }]
-    }]
-  });
+    var pyrmont = {lat: 55.8642, lng: -4.2518};
 
-  infoWindow = new google.maps.InfoWindow();
-  service = new google.maps.places.PlacesService(map);
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: pyrmont,
+        zoom: 15
+    });
 
-  // The idle event is a debounced event, so we can query & listen without
-  // throwing too many requests at the server.
-  map.addListener('idle', performSearch);
-}
-
-function performSearch() {
-  var request = {
-    bounds: map.getBounds(),
-    keyword: 'food'
-  };
-  service.radarSearch(request, callback);
+    infowindow = new google.maps.InfoWindow();
+    var service = new google.maps.places.PlacesService(map);
+    service.nearbySearch({
+        location: pyrmont,
+        radius: 500,
+        type: ['restaurant']
+    }, callback);
 }
 
 function callback(results, status) {
-  if (status !== google.maps.places.PlacesServiceStatus.OK) {
-    console.error(status);
-    return;
-  }
-  for (var i = 0, person_location_history; person_location_history = location_history_of_recommenders[i]; i++) {
-    for (var j = 0, result; result = person_location_history[j]; j++){
-        addMarker(result);
+    if (status === google.maps.places.PlacesServiceStatus.OK) {
+        for (var i = 0; i < results.length; i++) {
+            createMarker(results[i]);
+        }
     }
-  }
 }
 
-function addMarker(place) {
-  // console.log(JSON.stringify(place));
-  var marker = new google.maps.Marker({
-    map: map,
-    position: place.geometry.location,
-    icon: {
-      url: 'images/restaurant-marker.png',
-      anchor: new google.maps.Point(10, 10),
-      scaledSize: new google.maps.Size(30, 51)
-    }
-  });
-
-  google.maps.event.addListener(marker, 'click', function() {
-    service.getDetails(place, function(result, status) {
-      if (status !== google.maps.places.PlacesServiceStatus.OK) {
-        console.error(status);
-        return;
-      }
-      infoWindow.setContent(result.name);
-      infoWindow.open(map, marker);
+function createMarker(place) {
+    var placeLoc = place.geometry.location;
+    var marker = new google.maps.Marker({
+        map: map,
+        position: place.geometry.location,
+        icon: "images/restaurant-marker.png"
     });
-  });
+
+    google.maps.event.addListener(marker, 'click', function() {
+        infowindow.setContent(place.name);
+        infowindow.open(map, this);
+    });
 }
