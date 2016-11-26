@@ -39,7 +39,7 @@ function createMarker(place) {
     });
 
     google.maps.event.addListener(marker, 'click', function() {
-        $(".recommendation-card").css("bottom","15%");
+        $(".recommendation-card").css("bottom","10%");
         $(".recommendation-card").html(
             ""
         );
