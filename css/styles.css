@@ -27,8 +27,24 @@ html, body {
     width: 90%;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     transition: all 0.5s cubic-bezier(.25,.8,.25,1);
+    background-color: rgba(76,74,98,.8);
     padding: 20px;
     border-radius: 5px;
+    text-align: center;
+    color: #fff;
+}
+
+.recommendation-card ul {
+  list-style: none;
+}
+
+.recommendation-card ul li {
+  /*height: 80px;*/
+}
+
+.recommendation-card ul li img {
+  height: 100px;
+  width: 40%;
 }
 
 .place-image{
