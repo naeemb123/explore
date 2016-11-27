@@ -22,11 +22,23 @@
 <body>
 <div id="map-wrapper">
     <div id="map"></div>
-    <div class="recommendation-card">
-        <h1 class="recommendation-places" >Recommended Places</h1>
+    <div class="recommendation-card" id="draggable">
+        <h1 class="recommendation-places">
+            <img class="recommendation-icon" src="images/recommended-icon.png"/>Recommended Places
+        </h1>
+        <div class="menu-container">
+            <ul>
+                <li><a href='#'><img id='restaurantImg' src='images/restaurant-bg.png'></a></li>
+                <li><a href='#'><img id='clubImg' src='images/club.png'></a></li>
+                <li><a href='#'><img id='cinemaImg' src='images/cinema-bg.png'></a></li>
+                <li><a href='#'><img id='coffeeImg' src='images/coffee-bg.png'></a></li>
+                <h1 class='group-text'>Group Hangout</h1><img class='group-icon'  src='images/group-icon.png' />
+            </ul>
+        </div>
+        <div class="place-info"></div>
     </div>
-    </div>
-</body>
+</div>
+
 
 <!-- jQuery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -39,4 +51,6 @@
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZ-4c1K_waLSaih16MHGvPJNUpXWDFpdg&libraries=places&callback=initMap" async defer></script>
 
+
+</body>
 </html>

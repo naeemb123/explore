@@ -1,16 +1,27 @@
 $(document).ready(function () {
+
+    $( ".recommendation-card" ).draggable({
+        axis: "y"
+    });
+
     $(".recommendation-card").click(function () {
-        $(".recommendation-card").html(
-          "<h1 class='recommendation-places' >Recommended Places</h1>" +
-          "  <ul>" +
-              "<li><a href='#'><img id='restaurantImg' src='images/restaurant-bg.png'></a</li>" +
-              "<li><a href='#'><img id='clubImg' src='images/club.png'></a></li>" +
-              "<li><a href='#'><img id='cinemaImg' src='images/cinema-bg.png'></a></li>" +
-              "<li><a href='#'><img id='coffeeImg' src='images/coffee-bg.png'></a></li>" +
-            "</ul>"
-        );
+        $(".place-info").hide();
+        $(".menu-container").show();
         $(".recommendation-card").css("bottom","10%");
     });
+    $('.refresh').click(function() {
+        location.reload();
+    });
+
+    document.addEventListener('touchmove', function(e) {
+        e.preventDefault();
+        var touch = e.touches[0];
+        if(e.touches.length == 2){
+            //This means there are two finger move gesture on screen
+            googleMapsReference.setOptions({draggable:true});
+        }
+    }, false);
+
 });
 
 $(document).mouseup(function (e)
@@ -20,8 +31,6 @@ $(document).mouseup(function (e)
         && container.has(e.target).length === 0) // ... nor a descendant of the container
     {
         container.css("bottom","-70%");
-        $(".recommendation-card").html(
-            "<h1 class='recommendation-places'>Recommended Places</h1>"
-        );
+        $(".recommendation-places").show();
     }
 });

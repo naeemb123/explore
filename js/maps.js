@@ -10,7 +10,9 @@ function initMap() {
 
     map = new google.maps.Map(document.getElementById('map'), {
         center: pyrmont,
-        zoom: 17
+        zoom: 17,
+        disableDefaultUI: true,
+        gestureHandling: 'cooperative'
     });
 
     infowindow = new google.maps.InfoWindow();
@@ -40,17 +42,16 @@ function createMarker(place) {
 
     google.maps.event.addListener(marker, 'click', function() {
         $(".recommendation-card").css("bottom","10%");
-        $(".recommendation-card").html(
-            ""
-        );
+        $(".recommendation-places").hide();
+        $(".menu-container").hide();
         if(place.photos){
-            $(".recommendation-card").append(
+            $(".place-info").html(
                 "<div class='image-wrapper'>" +
                 "<img class='place-image' src='"+place.photos[0].getUrl({'maxWidth': 1000, 'maxHeight': 300})+"'/>" +
                 "</div>" +
                 "<h1 class='place-name'>"+place.name+"</h1>"
-
             );
+            $(".place-info").show();
         }
         // infowindow.setContent(place.name);
         // infowindow.open(map, this);

@@ -6,6 +6,8 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+    overflow: hidden;
+    overflow-y: hidden;
 }
 
 
@@ -36,22 +38,42 @@ html, body {
 
 .recommendation-places{
     font-family: 'Kite One', sans-serif;
-    font-size: 48px;
-    margin-top: 50px;
+    font-size: 21px;
+    margin-top: 15px
+}
+
+.recommendation-icon{
+    width: 36px;
+    height: 36px;
+    margin-bottom: 10px
 }
 
 .recommendation-card ul {
     list-style: none;
     padding-left: 0 !important;
-    margin-top: 50px;}
+}
 
 .recommendation-card ul li {
   /*height: 80px;*/
 }
 
 .recommendation-card ul li img {
-    height: 200px;
     width: 100%;
+}
+
+.menu-container{
+    display: none;
+}
+
+.group-icon{
+    margin-top: -10px;
+    width: 100px;
+}
+
+.group-text{
+    margin-top: 5px;
+    font-family: 'Varela Round', sans-serif;
+    font-size: 21px
 }
 
 .place-image{
@@ -62,6 +84,7 @@ html, body {
 .image-wrapper {
     height: 45%;
     overflow: hidden;
+    border-radius: 5px 5px 0px 0px;
 }
 
 .image-wrapper img {
@@ -74,8 +97,8 @@ html, body {
 }
 
 .place-name{
-    font-size: 48px;
+    font-size: 18px;
     position: relative;
     color: #101010;
-    left: 18px;
+    left: 0px;
 }
