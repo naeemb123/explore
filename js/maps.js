@@ -4,7 +4,7 @@
 
 var map;
 var infowindow;
-var myLoc = {lat: 55.873469, lng: -4.292006};
+var myLoc = {lat: 55.8737432, lng: -4.2945868};
 var restaurant_markers = [];
 var night_clubs_markers = [];
 var cafe_markers = [];
@@ -15,6 +15,52 @@ function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: myLoc,
         zoom: 17,
+        disableDefaultUI: true,
+        gestureHandling: 'auto',
+        clickableIcons: false
+    });
+
+    var service = new google.maps.places.PlacesService(map);
+    service.nearbySearch({
+        location: myLoc,
+        radius: 50,
+        type: ['restaurant']
+    }, callback1);
+
+    var service = new google.maps.places.PlacesService(map);
+    service.nearbySearch({
+        location: myLoc,
+        radius: 100,
+        type: ['bar']
+    }, callback2);
+
+    var service = new google.maps.places.PlacesService(map);
+    service.nearbySearch({
+        location: myLoc,
+        radius: 100,
+        type: ['movie_theater']
+    }, callback4);
+
+    var marker2 = new google.maps.Marker({
+        position: {lat: 55.874550, lng: -4.293224},
+        icon: "images/cluster.png",
+        map: map
+    });
+
+    marker2.addListener('click', function() {
+        map.setZoom(19);
+        map.setCenter({lat: 55.8747404, lng: -4.2931500});
+        this.setMap(null);
+        addLocations({lat: 55.8747404, lng: -4.2931500})
+    });
+
+}
+
+function addLocations(location) {
+
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: location,
+        zoom: 19,
         disableDefaultUI: true,
         gestureHandling: 'auto',
         clickableIcons: false
@@ -153,8 +199,6 @@ function createMarker(place,type) {
             );
         }
         $(".place-info").show();
-        // infowindow.setContent(place.name);
-        // infowindow.open(map, this);
     });
 
 }

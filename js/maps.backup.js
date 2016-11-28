@@ -4,57 +4,64 @@
 
 var map;
 var infowindow;
-var markers = [];
-var locations = [];
+var myLoc = {lat: 55.875469, lng: -4.292006};
+var restaurant_markers = [];
+var night_clubs_markers = [];
+var cafe_markers = [];
+var movie_theater_markers = [];
 
 function initMap() {
 
-    var myLoc = {lat: 55.873469, lng: -4.292006};
-
     map = new google.maps.Map(document.getElementById('map'), {
         center: myLoc,
-        zoom: 16,
+        zoom: 17,
         disableDefaultUI: true,
         gestureHandling: 'auto',
         clickableIcons: false
     });
 
     infowindow = new google.maps.InfoWindow();
-
     var service = new google.maps.places.PlacesService(map);
     service.nearbySearch({
         location: myLoc,
-        radius: 180,
-        type: ['movie_theater']
-    }, callback2);
-
-    var service = new google.maps.places.PlacesService(map);
-    service.nearbySearch({
-        location: myLoc,
-        radius: 180,
-        type: ['bar']
-    }, callback3);
-
-    var service = new google.maps.places.PlacesService(map);
-    service.nearbySearch({
-        location: myLoc,
-        radius: 180,
+        radius: 200,
         type: ['restaurant']
     }, callback1);
 
     var service = new google.maps.places.PlacesService(map);
     service.nearbySearch({
         location: myLoc,
-        radius: 180,
+        radius: 200,
+        type: ['bar']
+    }, callback2);
+
+    var service = new google.maps.places.PlacesService(map);
+    service.nearbySearch({
+        location: myLoc,
+        radius: 200,
         type: ['cafe']
+    }, callback3);
+
+    var service = new google.maps.places.PlacesService(map);
+    service.nearbySearch({
+        location: myLoc,
+        radius: 200,
+        type: ['movie_theater']
     }, callback4);
 
-    var markerCluster = new MarkerClusterer(map, markers, {imagePath: 'images/m'});
-    google.maps.event.addDomListener(window, 'load', initMap);
+    var marker2 = new google.maps.Marker({
+        position: {lat: 55.874550, lng: -4.293224},
+        icon: "images/cluster-icon-15.png",
+        map: map
+    });
+
+    marker2.addListener('click', function() {
+        map.setZoom(19);
+        map.setCenter({lat: 55.8747404, lng: -4.2931500});
+        this.setMap(null);
+    });
 
 }
-
-
 
 function callback1(results, status) {
     if (status === google.maps.places.PlacesServiceStatus.OK) {
@@ -66,21 +73,21 @@ function callback1(results, status) {
 function callback2(results, status) {
     if (status === google.maps.places.PlacesServiceStatus.OK) {
         for (var i = 0; i < results.length; i++) {
-            createMarker(results[i],"movie_theater");
+            createMarker(results[i],"bar");
         }
     }
 }
 function callback3(results, status) {
     if (status === google.maps.places.PlacesServiceStatus.OK) {
         for (var i = 0; i < results.length; i++) {
-            createMarker(results[i],"night_clubs");
+            createMarker(results[i],"cafe");
         }
     }
 }
 function callback4(results, status) {
     if (status === google.maps.places.PlacesServiceStatus.OK) {
         for (var i = 0; i < results.length; i++) {
-            createMarker(results[i],"cafe");
+            createMarker(results[i],"movie_theater");
         }
     }
 }
@@ -91,7 +98,7 @@ function createMarker(place,type) {
         restaurant: {
             icon: 'images/icons/icon-food.png'
         },
-        night_clubs: {
+        bar: {
             icon: 'images/icons/icon-club.png'
         },
         cafe: {
@@ -102,22 +109,26 @@ function createMarker(place,type) {
         }
     };
 
-
-
-    if(locations.indexOf(place.geometry.location) == -1) {
-        locations.push(place.geometry.location);
-    } else {
-        return false;
-    }
-
-
     var marker = new google.maps.Marker({
         map: map,
         position: place.geometry.location,
-        // icon: icons[type].icon
+        icon: icons[type].icon,
+        type: type
     });
 
-    markers.push(marker);
+    if (type == "restaurant"){
+        restaurant_markers.push(marker);
+    }
+    else if (type == "bar"){
+        night_clubs_markers.push(marker);
+    }
+    else if (type == "cafe"){
+        cafe_markers.push(marker);
+    }
+    else if (type == "movie_theater"){
+        movie_theater_markers.push(marker);
+    }
+
     google.maps.event.addListener(marker, 'click', function() {
         $(".recommendation-card").css("bottom","10%");
         $(".menu-container").hide();
@@ -137,7 +148,6 @@ function createMarker(place,type) {
                 "<a class='btn get-directions' href='#'><i class='material-icons icon-direction'>directions</i><br/><p class='text-direction' >Get Direction</p></a>" +
                 "</div>"
             );
-            $(".place-info").show();
         } else {
             $(".place-info").html(
                 "<div class='image-wrapper'>" +
@@ -154,11 +164,71 @@ function createMarker(place,type) {
                 "<a class='btn get-directions' href='#'><i class='material-icons icon-direction'>directions</i><br/><p class='text-direction' >Get Direction</p></a>" +
                 "</div>"
             );
-            $(".place-info").show();
         }
+        $(".place-info").show();
         // infowindow.setContent(place.name);
         // infowindow.open(map, this);
     });
 
 }
 
+
+var showRestaurant_Recommendations = function(){
+    clearMarkers();
+    for (var i = 0; i < restaurant_markers.length; i++ ) {
+        restaurant_markers[i].setMap(map);
+    }
+}
+
+var showCafe_Recommendations = function(){
+    clearMarkers();
+    for (var i = 0; i < cafe_markers.length; i++ ) {
+        cafe_markers[i].setMap(map);
+    }
+}
+
+var showMovie_Recommendations = function(){
+    clearMarkers();
+    for (var i = 0; i < movie_theater_markers.length; i++ ) {
+        movie_theater_markers[i].setMap(map);
+    }
+}
+
+var showNightClubs_Recommendations = function(){
+    clearMarkers();
+    for (var i = 0; i < night_clubs_markers.length; i++ ) {
+        night_clubs_markers[i].setMap(map);
+    }
+}
+
+// Removes the markers from the map
+var clearMarkers = function(){
+    clearRestuarantsFromMap();
+    clearCafesFromMap();
+    clearMovieFromMap();
+    clearClubbingFromMap();
+}
+
+var clearRestuarantsFromMap = function(){
+    for (var i = 0; i < restaurant_markers.length; i++ ) {
+        restaurant_markers[i].setMap(null);
+    }
+}
+
+var clearCafesFromMap = function (){
+    for (var i = 0; i < cafe_markers.length; i++ ) {
+        cafe_markers[i].setMap(null);
+    }
+}
+
+var clearMovieFromMap = function (){
+    for (var i = 0; i < movie_theater_markers.length; i++ ) {
+        movie_theater_markers[i].setMap(null);
+    }
+}
+
+var clearClubbingFromMap = function(){
+    for (var i = 0; i < night_clubs_markers.length; i++ ) {
+        night_clubs_markers[i].setMap(null);
+    }
+}
