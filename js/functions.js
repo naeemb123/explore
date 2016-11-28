@@ -23,31 +23,31 @@ $(document).ready(function () {
     });
 
     $('#restaurantImg').click(function () {
-      showRestaurant_Recommendations();
-      $(".recommendation-card").css("bottom", "-70%");
-      $(".place-info").hide();
-      $(".menu-container").show();
+        showRestaurant_Recommendations();
+        $(".recommendation-card").css("bottom", "-70%");
+        $(".place-info").hide();
+        $(".menu-container").show();
     });
 
     $('#clubImg').click(function () {
-      showNightClubs_Recommendations();
-      $(".recommendation-card").css("bottom", "-70%");
-      $(".place-info").hide();
-      $(".menu-container").show();
+        showNightClubs_Recommendations();
+        $(".recommendation-card").css("bottom", "-70%");
+        $(".place-info").hide();
+        $(".menu-container").show();
     });
 
     $('#cinemaImg').click(function () {
-      showMovie_Recommendations();
-      $(".recommendation-card").css("bottom", "-70%");
-      $(".place-info").hide();
-      $(".menu-container").show();
+        showMovie_Recommendations();
+        $(".recommendation-card").css("bottom", "-70%");
+        $(".place-info").hide();
+        $(".menu-container").show();
     });
 
     $('#coffeeImg').click(function () {
-      showCafe_Recommendations();
-      $(".recommendation-card").css("bottom", "-70%");
-      $(".place-info").hide();
-      $(".menu-container").show();
+        showCafe_Recommendations();
+        $(".recommendation-card").css("bottom", "-70%");
+        $(".place-info").hide();
+        $(".menu-container").show();
     });
 
 
