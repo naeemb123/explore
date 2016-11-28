@@ -18,6 +18,9 @@ $(document).ready(function () {
         }
     });
 
+    $( ".recommendation-places" ).click(function () {
+        $(".recommendation-card").css("bottom", "10%");
+    });
 
 });
 
