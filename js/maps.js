@@ -1,9 +1,13 @@
 
-var map;var infowindow;
+var map;
+var infowindow;
+var myLoc = {lat: 55.873469, lng: -4.292006};
+var restaurant_markers = [];
+var night_clubs_markers = [];
+var cafe_markers = [];
+var movie_theater_markers = [];
 
 function initMap() {
-
-    var myLoc = {lat: 55.873469, lng: -4.292006};
 
     map = new google.maps.Map(document.getElementById('map'), {
         center: myLoc,
@@ -106,8 +110,21 @@ function createMarker(place,type) {
     var marker = new google.maps.Marker({
         map: map,
         position: place.geometry.location,
-        icon: icons[type].icon
+        icon: icons[type].icon,
+        type: type
     });
+    if (type == "restaurant"){
+      restaurant_markers.push(marker);
+    }
+    else if (type == "night_clubs"){
+      night_clubs_markers.push(marker);
+    }
+    else if (type == "cafe"){
+      cafe_markers.push(marker);
+    }
+    else if (type == "movie_theater"){
+      movie_theater_markers.push(marker);
+    }
 
     google.maps.event.addListener(marker, 'click', function() {
         $(".recommendation-card").css("bottom","10%");
@@ -151,4 +168,65 @@ function createMarker(place,type) {
         // infowindow.open(map, this);
     });
 
+}
+
+
+var showRestaurant_Recommendations = function(){
+  clearMarkers();
+  for (var i = 0; i < restaurant_markers.length; i++ ) {
+    restaurant_markers[i].setMap(map);
+  }
+}
+
+var showCafe_Recommendations = function(){
+  clearMarkers();
+  for (var i = 0; i < cafe_markers.length; i++ ) {
+    cafe_markers[i].setMap(map);
+  }
+}
+
+var showMovie_Recommendations = function(){
+  clearMarkers();
+  for (var i = 0; i < movie_theater_markers.length; i++ ) {
+    movie_theater_markers[i].setMap(map);
+  }
+}
+
+var showNightClubs_Recommendations = function(){
+  clearMarkers();
+  for (var i = 0; i < night_clubs_markers.length; i++ ) {
+    night_clubs_markers[i].setMap(map);
+  }
+}
+
+// Removes the markers from the map
+var clearMarkers = function(){
+  clearRestuarantsFromMap();
+  clearCafesFromMap();
+  clearMovieFromMap();
+  clearClubbingFromMap();
+}
+
+var clearRestuarantsFromMap = function(){
+  for (var i = 0; i < restaurant_markers.length; i++ ) {
+    restaurant_markers[i].setMap(null);
+  }
+}
+
+var clearCafesFromMap = function (){
+  for (var i = 0; i < cafe_markers.length; i++ ) {
+    cafe_markers[i].setMap(null);
+  }
+}
+
+var clearMovieFromMap = function (){
+  for (var i = 0; i < movie_theater_markers.length; i++ ) {
+    movie_theater_markers[i].setMap(null);
+  }
+}
+
+var clearClubbingFromMap = function(){
+  for (var i = 0; i < night_clubs_markers.length; i++ ) {
+    night_clubs_markers[i].setMap(null);
+  }
 }

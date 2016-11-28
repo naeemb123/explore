@@ -22,6 +22,37 @@ $(document).ready(function () {
         $(".recommendation-card").css("bottom", "10%");
     });
 
+    $('#restaurantImg').click(function () {
+      showRestaurant_Recommendations();
+      $(".recommendation-card").css("bottom", "-70%");
+      $(".place-info").hide();
+      $(".menu-container").show();
+    });
+
+    $('#clubImg').click(function () {
+      showNightClubs_Recommendations();
+      $(".recommendation-card").css("bottom", "-70%");
+      $(".place-info").hide();
+      $(".menu-container").show();
+    });
+
+    $('#cinemaImg').click(function () {
+      showMovie_Recommendations();
+      $(".recommendation-card").css("bottom", "-70%");
+      $(".place-info").hide();
+      $(".menu-container").show();
+    });
+
+    $('#coffeeImg').click(function () {
+      showCafe_Recommendations();
+      $(".recommendation-card").css("bottom", "-70%");
+      $(".place-info").hide();
+      $(".menu-container").show();
+    });
+
+
+
+
 });
 
 // $(document).mouseup(function (e)
