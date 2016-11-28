@@ -1,5 +1,11 @@
+// This example requires the Places library. Include the libraries=places
+// parameter when you first load the API. For example:
+// <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
-var map;var infowindow;
+var map;
+var infowindow;
+var markers = [];
+var locations = [];
 
 function initMap() {
 
@@ -7,7 +13,7 @@ function initMap() {
 
     map = new google.maps.Map(document.getElementById('map'), {
         center: myLoc,
-        zoom: 17,
+        zoom: 16,
         disableDefaultUI: true,
         gestureHandling: 'auto',
         clickableIcons: false
@@ -18,43 +24,36 @@ function initMap() {
     var service = new google.maps.places.PlacesService(map);
     service.nearbySearch({
         location: myLoc,
-        radius: 250,
+        radius: 180,
         type: ['movie_theater']
     }, callback2);
 
     var service = new google.maps.places.PlacesService(map);
     service.nearbySearch({
         location: myLoc,
-        radius: 250,
+        radius: 180,
         type: ['bar']
     }, callback3);
 
     var service = new google.maps.places.PlacesService(map);
     service.nearbySearch({
         location: myLoc,
-        radius: 250,
+        radius: 180,
         type: ['restaurant']
     }, callback1);
 
     var service = new google.maps.places.PlacesService(map);
     service.nearbySearch({
         location: myLoc,
-        radius: 250,
+        radius: 180,
         type: ['cafe']
     }, callback4);
 
-    var marker2 = new google.maps.Marker({
-        position: {lat: 55.873250, lng: -4.293224},
-        icon: "images/icon-cluster.png",
-        map: map
-    });
+    var markerCluster = new MarkerClusterer(map, markers, {imagePath: 'images/m'});
+    google.maps.event.addDomListener(window, 'load', initMap);
 
-    marker2.addListener('click', function() {
-        map.setZoom(19);
-        map.setCenter({lat: 55.8747404, lng: -4.2931500});
-        this.setMap(null);
-    });
 }
+
 
 
 function callback1(results, status) {
@@ -103,12 +102,22 @@ function createMarker(place,type) {
         }
     };
 
+
+
+    if(locations.indexOf(place.geometry.location) == -1) {
+        locations.push(place.geometry.location);
+    } else {
+        return false;
+    }
+
+
     var marker = new google.maps.Marker({
         map: map,
         position: place.geometry.location,
-        icon: icons[type].icon
+        // icon: icons[type].icon
     });
 
+    markers.push(marker);
     google.maps.event.addListener(marker, 'click', function() {
         $(".recommendation-card").css("bottom","10%");
         $(".menu-container").hide();
@@ -152,3 +161,4 @@ function createMarker(place,type) {
     });
 
 }
+
