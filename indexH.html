@@ -22,11 +22,12 @@
 <body>
 <div id="map-wrapper">
     <div id="map"></div>
+    <div class="recommendation-card-catch" id="droppable"></div>
     <div class="recommendation-card" id="draggable">
+        <h1 class="recommendation-places">
+            <img class="recommendation-icon" src="images/recommended-icon.png"/>Recommended Places
+        </h1>
         <div class="menu-container">
-            <h1 class="recommendation-places">
-                <img class="recommendation-icon" src="images/recommended-icon.png"/>Recommended Places
-            </h1>
             <ul>
                 <li><a href='#'><img id='restaurantImg' src='images/restaurant-bg.png'></a></li>
                 <li><a href='#'><img id='clubImg' src='images/club.png'></a></li>
@@ -47,12 +48,12 @@
 <!-- bootstrap -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <!-- touch support -->
-<script src="js/jquery.touchSwipe.min.js"></script>
-<!--<script src="//cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>-->
+<script src="js/jquery.ui.touch-punch.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
 
 <!-- myScripts -->
 <!--<script src="js/functions.js"></script>-->
-<script src="js/functions.js"></script>
+<script src="js/functionsH.js"></script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZ-4c1K_waLSaih16MHGvPJNUpXWDFpdg&libraries=places&callback=initMap" async defer></script>
 

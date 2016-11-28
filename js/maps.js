@@ -12,7 +12,8 @@ function initMap() {
         center: pyrmont,
         zoom: 17,
         disableDefaultUI: true,
-        gestureHandling: 'cooperative'
+        gestureHandling: 'auto',
+        clickableIcons: false
     });
 
     infowindow = new google.maps.InfoWindow();
@@ -42,7 +43,6 @@ function createMarker(place) {
 
     google.maps.event.addListener(marker, 'click', function() {
         $(".recommendation-card").css("bottom","10%");
-        $(".recommendation-places").hide();
         $(".menu-container").hide();
         if(place.photos){
             $(".place-info").html(

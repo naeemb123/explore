@@ -28,7 +28,26 @@ html, body {
     left: 5%;
     width: 90%;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    transition: all 0.5s cubic-bezier(.25,.8,.25,1);
+    transition: all 0.2s;
+    transition-timing-function: ease;
+    /*background-color: rgba(76,74,98,.8);*/
+    /*padding: 20px;*/
+    border-radius: 5px;
+    text-align: center;
+    /*color: #fff;*/
+    /*-webkit-transform: translateZ(0);*/
+}
+
+.recommendation-card-catch{
+    position: absolute;
+    bottom: 0%;
+    z-index: 99;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    left: 5%;
+    width: 90%;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    transition: all 0.5s cubic-bezier(.25, .8, .25, 1);
     /*background-color: rgba(76,74,98,.8);*/
     /*padding: 20px;*/
     border-radius: 5px;
@@ -62,7 +81,7 @@ html, body {
 }
 
 .menu-container{
-    display: none;
+    display: block;
 }
 
 .group-icon{
