@@ -44,12 +44,12 @@ function initMap() {
         type: ['restaurant']
     }, callback1);
 
-    var service = new google.maps.places.PlacesService(map);
-    service.nearbySearch({
-        location: myLoc,
-        radius: 50,
-        type: ['bar']
-    }, callback2);
+    // var service = new google.maps.places.PlacesService(map);
+    // service.nearbySearch({
+    //     location: myLoc,
+    //     radius: 500,
+    //     type: ['night_club']
+    // }, callback2);
 
     var service = new google.maps.places.PlacesService(map);
     service.nearbySearch({
@@ -58,12 +58,12 @@ function initMap() {
         type: ['cafe']
     }, callback3);
 
-    var service = new google.maps.places.PlacesService(map);
-    service.nearbySearch({
-        location: myLoc,
-        radius: 50,
-        type: ['movie_theater']
-    }, callback4);
+    // var service = new google.maps.places.PlacesService(map);
+    // service.nearbySearch({
+    //     location: myLoc,
+    //     radius: 50,
+    //     type: ['movie_theater']
+    // }, callback4);
 
     // var marker2 = new google.maps.Marker({
     //     position: {lat: 55.874550, lng: -4.293224},
@@ -86,7 +86,7 @@ function showNearBy(marker) {
         if(place.photos){
             $(".place-info").html(
                 "<div class='image-wrapper'>" +
-                "<img class='place-image' src='"+place.photos[0].getUrl({'maxWidth': 1000, 'maxHeight': 300})+"'/>" +
+                "<img class='place-image' src='images/no-image.jpg'/>" +
                 "</div>" +
                 "<h1 class='place-name'>"+place.name+"</h1>"+
                 "<div class='rating'>"+

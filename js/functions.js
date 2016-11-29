@@ -13,10 +13,14 @@ $(document).ready(function () {
             // $(".menu-container").show();
             // $(".recommendation-places").text("You swiped " + direction );
             $(".recommendation-card").css("bottom", "-70%");
-            $(".place-info").hide();
-            $(".menu-container").show();
+            setTimeout(afterCss, 100);
         }
     });
+
+    function afterCss() {
+        $(".place-info").hide();
+        $(".menu-container").show();
+    }
 
     $( ".recommendation-places" ).click(function () {
         $(".recommendation-card").css("bottom", "10%");
@@ -91,9 +95,13 @@ $(document).ready(function () {
     });
 
     $(".profile-button").click(function () {
-
+        $('.profile-window').css('left','0%');
     });
-    
+
+    $(".back-button").click(function () {
+        $('.profile-window').css('left','100%');
+    });
+
 });
 
 // $(document).mouseup(function (e)
