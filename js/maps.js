@@ -72,13 +72,6 @@ function initMap() {
     service.nearbySearch({
         location: glasgowLoc,
         radius: 1000,
-        type: ['cafe']
-    }, callback3);
-
-    var service = new google.maps.places.PlacesService(map);
-    service.nearbySearch({
-        location: glasgowLoc,
-        radius: 1000,
         type: ['movie_theater']
     }, callback4);
 
@@ -103,7 +96,7 @@ function showNearBy(marker) {
         if(place.photos){
             $(".place-info").html(
                 "<div class='image-wrapper'>" +
-                "<img class='place-image' src='"+place.photos[0].getUrl({'maxWidth': 1000, 'maxHeight': 300})+"'/>" +
+                "<img class='place-image' src='images/no-image.jpg'/>" +
                 "</div>" +
                 "<h1 class='place-name'>"+place.name+"</h1>"+
                 "<div class='rating'>"+
