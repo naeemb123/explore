@@ -7,7 +7,7 @@ var infowindow;
 var myLoc = {lat: 55.875469, lng: -4.292006};
 var nearLoc = {lat: 55.8755843, lng: -4.2941678};
 var glasgowLoc = {lat: 55.864237, lng: -4.251806}
-var option = "nearby";
+var option = "city";
 var restaurant_markers = [];
 var night_clubs_markers = [];
 var cafe_markers = [];
@@ -57,7 +57,7 @@ function initMap() {
     var service = new google.maps.places.PlacesService(map);
     service.nearbySearch({
         location: glasgowLoc,
-        radius: 1000,
+        radius: 10000,
         type: ['restaurant']
     }, callback1);
 
@@ -82,17 +82,17 @@ function initMap() {
         type: ['movie_theater']
     }, callback4);
 
-    // var marker2 = new google.maps.Marker({
-    //     position: {lat: 55.874550, lng: -4.293224},
-    //     icon: "images/cluster-icon-15.png",
-    //     map: map
-    // });
-    //
-    // marker2.addListener('click', function() {
-    //     map.setZoom(19);
-    //     map.setCenter({lat: 55.8747404, lng: -4.2931500});
-    //     this.setMap(null);
-    // });
+    var marker2 = new google.maps.Marker({
+        position: {lat: 55.874550, lng: -4.293224},
+        icon: "images/cluster-icon-15.png",
+        map: map
+    });
+
+    marker2.addListener('click', function() {
+        map.setZoom(19);
+        map.setCenter({lat: 55.8747404, lng: -4.2931500});
+        this.setMap(null);
+    });
 
 }
 
@@ -126,23 +126,25 @@ function callback1(results, status) {
     if (status === google.maps.places.PlacesServiceStatus.OK) {
         for (var i = 0; i < results.length; i++) {
           if (results.length > 9 && i<10){
-            if (i<2) recommender1["restaurant"+counter++] = results[i]; else {counter=1}
-            if (i<4 && i>1) recommender2["restaurant"+counter++] = results[i]; else {counter=1}
-            if (i<6 && i>3) recommender3["restaurant"+counter++] = results[i]; else {counter=1}
-            if (i<8 && i>5) recommender4["restaurant"+counter++] = results[i]; else {counter=1}
-            if (i<10 && i>7) recommender5["restaurant"+counter++] = results[i]; else {counter=1}
-          }
-          else{
-            recommender1["restaurant1"] = results[1];recommender1["restaurant2"] = results[2];
-            recommender2["restaurant1"] = results[0];recommender2["restaurant2"] = results[1];
-            recommender3["restaurant1"] = results[2];recommender3["restaurant2"] = results[0];
-            recommender4["restaurant1"] = results[2];recommender4["restaurant2"] = results[0];
-            recommender5["restaurant1"] = results[0];recommender5["restaurant2"] = results[1];
+            if (i<2) recommender1["restaurant"+counter++] = results[i];
+            else if (i<4 && i>1) recommender2["restaurant"+counter++] = results[i];
+            else if (i<6 && i>3) recommender3["restaurant"+counter++] = results[i];
+            else if (i<8 && i>5) recommender4["restaurant"+counter++] = results[i];
+            else if (i<10 && i>7) recommender5["restaurant"+counter++] = results[i];
+            if( counter == 3 ) counter = 1;
           }
 
           if (option == "nearby"){
               createMarker(results[i],"restaurant");
           }
+        }
+
+        if (results.length < 9){
+          recommender1["restaurant1"] = results[1];recommender1["restaurant2"] = results[2];
+          recommender2["restaurant1"] = results[0];recommender2["restaurant2"] = results[1];
+          recommender3["restaurant1"] = results[2];recommender3["restaurant2"] = results[0];
+          recommender4["restaurant1"] = results[2];recommender4["restaurant2"] = results[0];
+          recommender5["restaurant1"] = results[0];recommender5["restaurant2"] = results[1];
         }
         if (option == "city"){
           createMarker(recommender1['restaurant1'], "restaurant");
@@ -163,23 +165,25 @@ function callback2(results, status) {
     if (status === google.maps.places.PlacesServiceStatus.OK) {
         for (var i = 0; i < results.length; i++) {
             if (results.length > 9 && i<10){
-              if (i<2) recommender1["nightClubs"+counter++] = results[i]; else {counter=1}
-              if (i<4 && i>1) recommender2["nightClubs"+counter++] = results[i]; else {counter=1}
-              if (i<6 && i>3) recommender3["nightClubs"+counter++] = results[i]; else {counter=1}
-              if (i<8 && i>5) recommender4["nightClubs"+counter++] = results[i]; else {counter=1}
-              if (i<10 && i>7) recommender5["nightClubs"+counter++] = results[i]; else {counter=1}
-            }
-            else{
-              recommender1["nightClubs1"] = results[1];recommender1["nightClubs2"] = results[2];
-              recommender2["nightClubs1"] = results[0];recommender2["nightClubs2"] = results[1];
-              recommender3["nightClubs1"] = results[2];recommender3["nightClubs2"] = results[0];
-              recommender4["nightClubs1"] = results[2];recommender4["nightClubs2"] = results[0];
-              recommender5["nightClubs1"] = results[0];recommender5["nightClubs2"] = results[1];
+              if (i<2) recommender1["nightClubs"+counter++] = results[i];
+              else if (i<4 && i>1) recommender2["nightClubs"+counter++] = results[i];
+              else if (i<6 && i>3) recommender3["nightClubs"+counter++] = results[i];
+              else if (i<8 && i>5) recommender4["nightClubs"+counter++] = results[i];
+              else if (i<10 && i>7) recommender5["nightClubs"+counter++] = results[i];
+              if (counter == 3) counter=1;
             }
             if (option == "nearby"){
               createMarker(results[i],"bar");
             }
         }
+        if (results.length < 9){
+          recommender1["nightClubs1"] = results[1];recommender1["nightClubs2"] = results[2];
+          recommender2["nightClubs1"] = results[0];recommender2["nightClubs2"] = results[1];
+          recommender3["nightClubs1"] = results[2];recommender3["nightClubs2"] = results[0];
+          recommender4["nightClubs1"] = results[2];recommender4["nightClubs2"] = results[0];
+          recommender5["nightClubs1"] = results[0];recommender5["nightClubs2"] = results[1];
+        }
+
         if (option == "city"){
           createMarker(recommender1['nightClubs1'], "bar");
           createMarker(recommender1['nightClubs2'], "bar");
@@ -199,24 +203,26 @@ function callback3(results, status) {
     if (status === google.maps.places.PlacesServiceStatus.OK) {
         for (var i = 0; i < results.length; i++) {
           if (results.length > 9 && i<10){
-            if (i<2) recommender1["cafe"+counter++] = results[i]; else {counter=1}
-            if (i<4 && i>1) recommender2["cafe"+counter++] = results[i]; else {counter=1}
-            if (i<6 && i>3) recommender3["cafe"+counter++] = results[i]; else {counter=1}
-            if (i<8 && i>5) recommender4["cafe"+counter++] = results[i]; else {counter=1}
-            if (i<10 && i>7) recommender5["cafe"+counter++] = results[i]; else {counter=1}
+            if (i<2) recommender1["cafe"+counter++] = results[i];
+            else if (i<4 && i>1) recommender2["cafe"+counter++] = results[i];
+            else if (i<6 && i>3) recommender3["cafe"+counter++] = results[i];
+            else if (i<8 && i>5) recommender4["cafe"+counter++] = results[i];
+            else if (i<10 && i>7) recommender5["cafe"+counter++] = results[i];
+            if (counter == 3) counter = 1;
           }
-          else{
-            recommender1["cafe1"] = results[1];recommender1["cafe2"] = results[2];
-            recommender2["cafe1"] = results[0];recommender2["cafe2"] = results[1];
-            recommender3["cafe1"] = results[2];recommender3["cafe2"] = results[0];
-            recommender4["cafe1"] = results[2];recommender4["cafe2"] = results[0];
-            recommender5["cafe1"] = results[0];recommender5["cafe2"] = results[1];
-          }
-
           if (option == "nearby"){
             createMarker(results[i],"cafe");
           }
         }
+
+        if (results.length < 9){
+          recommender1["cafe1"] = results[1];recommender1["cafe2"] = results[2];
+          recommender2["cafe1"] = results[0];recommender2["cafe2"] = results[1];
+          recommender3["cafe1"] = results[2];recommender3["cafe2"] = results[0];
+          recommender4["cafe1"] = results[2];recommender4["cafe2"] = results[0];
+          recommender5["cafe1"] = results[0];recommender5["cafe2"] = results[1];
+        }
+
         if (option == "city"){
           createMarker(recommender1['cafe1'], "cafe");
           createMarker(recommender1['cafe2'], "cafe");
@@ -236,23 +242,26 @@ function callback4(results, status) {
     if (status === google.maps.places.PlacesServiceStatus.OK) {
         for (var i = 0; i < results.length; i++) {
           if (results.length > 9 && i<10){
-            if (i<2) recommender1["movieTheatre"+counter++] = results[i]; else {counter=1}
-            if (i<4 && i>1) recommender2["movieTheatre"+counter++] = results[i]; else {counter=1}
-            if (i<6 && i>3) recommender3["movieTheatre"+counter++] = results[i]; else {counter=1}
-            if (i<8 && i>5) recommender4["movieTheatre"+counter++] = results[i]; else {counter=1}
-            if (i<10 && i>7) recommender5["movieTheatre"+counter++] = results[i]; else {counter=1}
-          }
-          else{
-            recommender1["movieTheatre1"] = results[1];recommender1["movieTheatre2"] = results[2];
-            recommender2["movieTheatre1"] = results[0];recommender2["movieTheatre2"] = results[1];
-            recommender3["movieTheatre1"] = results[2];recommender3["movieTheatre2"] = results[0];
-            recommender4["movieTheatre1"] = results[2];recommender4["movieTheatre2"] = results[0];
-            recommender5["movieTheatre1"] = results[0];recommender5["movieTheatre2"] = results[1];
+            if (i<2) recommender1["movieTheatre"+counter++] = results[i];
+            else if (i<4 && i>1) recommender2["movieTheatre"+counter++] = results[i];
+            else if (i<6 && i>3) recommender3["movieTheatre"+counter++] = results[i];
+            else if (i<8 && i>5) recommender4["movieTheatre"+counter++] = results[i];
+            else if (i<10 && i>7) recommender5["movieTheatre"+counter++] = results[i];
+            if (counter == 3) counter=1;
           }
           if (option == "nearby"){
             createMarker(results[i],"movie_theater");
           }
         }
+
+        if (results.length < 9){
+          recommender1["movieTheatre1"] = results[1];recommender1["movieTheatre2"] = results[2];
+          recommender2["movieTheatre1"] = results[0];recommender2["movieTheatre2"] = results[1];
+          recommender3["movieTheatre1"] = results[2];recommender3["movieTheatre2"] = results[0];
+          recommender4["movieTheatre1"] = results[2];recommender4["movieTheatre2"] = results[0];
+          recommender5["movieTheatre1"] = results[0];recommender5["movieTheatre2"] = results[1];
+        }
+
         if (option == "city"){
           createMarker(recommender1['movieTheatre1'], "movie_theater");
           createMarker(recommender1['movieTheatre2'], "movie_theater");
@@ -349,7 +358,7 @@ function createMarker(place,type) {
 
 
 var showRestaurant_Recommendations = function(){
-    clearMarkers();
+    clearMarkers()
     for (var i = 0; i < restaurant_markers.length; i++ ) {
         // console.log(JSON.stringify(restaurant_markers[i]));
         restaurant_markers[i].setMap(map);
