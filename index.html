@@ -5,7 +5,7 @@
 
     <!--fonts-->
     <link href="https://fonts.googleapis.com/css?family=Kite+One" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
     <!-- CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <!-- Optional theme -->
@@ -22,18 +22,47 @@
 <body>
 <div id="map-wrapper">
     <div id="map"></div>
-    <div class="recommendation-card" id="draggable">
+    <div class="profile-button">
+    </div>
+    <div class="recommendation-card">
         <div class="menu-container">
             <h1 class="recommendation-places">
-                <img class="recommendation-icon" src="images/recommended-icon.png"/>Recommended Places
+                <img class="recommendation-icon" src="images/recommended-icon.png"/>Get Recommendations
             </h1>
             <ul>
-                <li><a href='#'><img id='restaurantImg' src='images/restaurant-bg.png'></a></li>
-                <li><a href='#'><img id='clubImg' src='images/coffee-bg.png'></a></li>
-                <li><a href='#'><img id='cinemaImg' src='images/cinema-bg.png'></a></li>
-                <li><a href='#'><img id='coffeeImg' src='images/club.png'></a></li>
-                <h1 class='group-text'>Group Hangout</h1><img class='group-icon'  src='images/group-icon.png' />
+                <li><a href='#'><h2 class="recom-text" style="margin-left: 25%">Restaurants</h2><img id='restaurantImg' src='images/restaurant-bg.png'></a></li>
+                <li><a href='#'><h2 class="recom-text" style="margin-left: 40%">Cafe</h2><img id='coffeeImg' src='images/coffee-bg.png'></a></li>
+                <li><a href='#'><h2 class="recom-text" style="margin-left: 35%">Cinema</h2><img id='cinemaImg' src='images/cinema-bg.png'></a></li>
+                <li><a href='#'><h2 class="recom-text" style="margin-left: 40%">Clubs</h2><img id='clubImg' src='images/club.png'></a></li>
+                <div class="group-div">
+                    <h1 class='group-text'>Group Hangout</h1><img class='group-icon'  src='images/group-icon.png' />
+                </div>
             </ul>
+        </div>
+        <div class="add-friends">
+            <h1 class="recommendation-places">
+                <img class="recommendation-icon" src="images/recommended-icon.png"/>Add Friends
+            </h1>
+            <input class="friend-input" type="text" placeholder="Enter Friends Username" value="" style="width: 80%; padding: 10px;">
+            <div id="searched-friend" style="display: flex; font-size: 18px;">
+            </div>
+            <hr/>
+            <h1 class="recommendation-places group-recent-text">
+                Recently Went Out With
+            </h1>
+            <div class="list-of-friends" style="display: flex; font-size: 18px;">
+                <p class="friend-icon">
+                    <i class="material-icons" style="font-size: 60px; color: #0a6ebd;">face</i><br/>Nayhall
+                </p>
+                <p class="friend-icon">
+                    <i class="material-icons" style="font-size: 60px; color: #3e8f3e;">face</i><br/>Hamza
+                </p>
+                <p class="friend-icon">
+                    <i class="material-icons" style="font-size: 60px; color: #9c27b0;">face</i><br/>Jermey
+                </p>
+            </div>
+            <br/>
+            <button class="btn added-friends">Hangout</button>
         </div>
         <div class="place-info"></div>
     </div>

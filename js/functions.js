@@ -50,9 +50,50 @@ $(document).ready(function () {
         $(".menu-container").show();
     });
 
+    $(".group-icon").click(function () {
+        $(".menu-container").slideUp("slow",function () {
+            $(".add-friends").show();
+        });
+    });
 
+    $(".friend-input").keypress(function(e) {
+        if(e.which == 13) {
+            $("#searched-friend").append(
+                "<p style='margin-left: 20px; margin-top: 20px'>" +
+                "<i class='material-icons' style='font-size: 60px; color: #9c27b0;'>face</i><br/>Ben </p>"
+            );
+        }
+    });
 
+    $(".friend-input").focusin(function () {
+        $(".list-of-friends").hide();
+        $(".group-recent-text").hide();
+    });
 
+    $(".friend-input").focusout(function () {
+        $(".list-of-friends").show();
+        $(".group-recent-text").show();
+    });
+
+    $(".friend-icon").click(function () {
+        $(this).toggleClass("friend-icon-clicked");
+    });
+
+    $(".added-friends").click(function () {
+        $(".add-friends").hide();
+        $(".menu-container").slideDown("slow");
+        $(".group-div").html(
+            "<p class='friend-icon' style='float: left'>" +
+            "<i class='material-icons' style='font-size: 60px; color: #9c27b0;'>face</i><br/>Ben </p>"+
+            "<p class='friend-icon' style='float: left'>" +
+            "<i class='material-icons' style='font-size: 60px;'>add_circle_outline</i><br/>Add More</p>"
+        );
+    });
+
+    $(".profile-button").click(function () {
+
+    });
+    
 });
 
 // $(document).mouseup(function (e)
