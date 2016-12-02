@@ -16,7 +16,26 @@
 <body>
 <div id="map-wrapper">
     <div id="map"></div>
+    <div class="like-window" style="padding: 10px;">
+        <span style="font-size: 18px;">Your experience at </span>
+        <h3 style="color: darkblue; margin-top: 0px">Power By Coffee</h3>
+        <div class="like-place">
+            <i class="material-icons like-btn">thumb_up</i>
+        </div>
+        <div class="dislike-place">
+            <i class="material-icons like-btn">thumb_down</i>
+        </div>
+    </div>
     <div class="profile-button">
+    </div>
+    <div class="my-location">
+        <i class="material-icons location-icon">my_location</i>
+    </div>
+    <div class="rest-button">
+        <div class="btn-group">
+            <a href="#" class="btn btn-default near">Near By</a>
+            <a href="#" class="btn btn-default top">Top 10</a>
+        </div>
     </div>
     <div class="profile-window" style="padding: 10px;">
         <button class="btn back-button">
@@ -24,8 +43,8 @@
         </button>
         <h3 class="ranking"><i class='material-icons icon-direction' style="color: darkorange;">stars</i><br/>1200</h3>
         <br/>
-        <img class="profile-pic" src="images/profile.jpg" />
-        <h2 class="profile-name">Steve Jobs</h2>
+        <img class="profile-pic" src="images/profile.png" />
+        <h2 class="profile-name">Ben</h2>
         <h3>Ranks in Top 10% of Glasgow</h3>
 
         <ul style="list-style: none; padding-left: 50px; padding-right: 50px; margin-top: 50px">
@@ -52,10 +71,22 @@
                 <img class="recommendation-icon" src="images/recommended-icon.png"/>Get Recommendations
             </h1>
             <ul>
-                <li><a href='#'><img id='restaurantImg' src='images/restaurant-bg.png'></a></li>
-                <li><a href='#'><img id='coffeeImg' src='images/coffee-bg.png'></a></li>
-                <li><a href='#'><img id='cinemaImg' src='images/cinema-bg.png'></a></li>
-                <li><a href='#'><img id='clubImg' src='images/club.png'></a></li>
+                <li><a href='#'>
+                    <h2 class="recom-text" style="margin-left: 31%;margin-top: 10%">Restaurant</h2>
+                    <img id='restaurantImg' src='images/restaurant-bg.png'></a>
+                </li>
+                <li>
+                    <h2 class="recom-text" style="margin-left: 41%;margin-top: 10%">Cafe</h2>
+                    <a href='#'><img id='coffeeImg' src='images/coffee-bg.png'></a>
+                </li>
+                <li>
+                    <h2 class="recom-text" style="margin-left: 37%;margin-top: 10%">Cinema</h2>
+                    <a href='#'><img id='cinemaImg' src='images/cinema-bg.png'></a>
+                </li>
+                <li>
+                    <h2 class="recom-text" style="margin-left: 40%;margin-top: 10%">Clubs</h2>
+                    <a href='#'><img id='clubImg' src='images/club.png'></a>
+                </li>
                 <div class="group-div">
                     <h1 class='group-text'>Group Hangout</h1><img class='group-icon'  src='images/group-icon.png' />
                 </div>
@@ -101,6 +132,8 @@
 <script src="js/markerclusterer.js"></script>
 
 <script src="js/maps.js"></script>
+<script src="js/recommendations.js"></script>
+<script src="js/recommendations_clubs.js"></script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZ-4c1K_waLSaih16MHGvPJNUpXWDFpdg&libraries=places&callback=initMap" async defer></script>
 <script src="js/functions.js"></script>

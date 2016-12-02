@@ -5,6 +5,7 @@
 var map;
 var infowindow;
 var myLoc = {lat: 55.875469, lng: -4.292006};
+var nearLoc = {lat: 55.8755843, lng: -4.2941678};
 var restaurant_markers = [];
 var night_clubs_markers = [];
 var cafe_markers = [];
@@ -14,53 +15,93 @@ function initMap() {
 
     map = new google.maps.Map(document.getElementById('map'), {
         center: myLoc,
-        zoom: 17,
+        zoom: 19,
         disableDefaultUI: true,
         gestureHandling: 'auto',
         clickableIcons: false
     });
 
     infowindow = new google.maps.InfoWindow();
+
+    var location = new google.maps.Marker({
+        position: myLoc,
+        icon: "images/icons/myLocation1.png",
+        map: map
+    });
+
+    var nearLoc = new google.maps.Marker({
+        position: nearLoc,
+        icon: "images/icons/icon-coffee.png",
+        map: map
+    });
+
+    showNearBy(nearLoc);
+
     var service = new google.maps.places.PlacesService(map);
     service.nearbySearch({
         location: myLoc,
-        radius: 200,
+        radius: 70,
         type: ['restaurant']
     }, callback1);
 
     var service = new google.maps.places.PlacesService(map);
     service.nearbySearch({
         location: myLoc,
-        radius: 200,
+        radius: 50,
         type: ['bar']
     }, callback2);
 
     var service = new google.maps.places.PlacesService(map);
     service.nearbySearch({
         location: myLoc,
-        radius: 200,
+        radius: 50,
         type: ['cafe']
     }, callback3);
 
     var service = new google.maps.places.PlacesService(map);
     service.nearbySearch({
         location: myLoc,
-        radius: 200,
+        radius: 50,
         type: ['movie_theater']
     }, callback4);
 
-    var marker2 = new google.maps.Marker({
-        position: {lat: 55.874550, lng: -4.293224},
-        icon: "images/cluster-icon-15.png",
-        map: map
-    });
+    // var marker2 = new google.maps.Marker({
+    //     position: {lat: 55.874550, lng: -4.293224},
+    //     icon: "images/cluster-icon-15.png",
+    //     map: map
+    // });
+    //
+    // marker2.addListener('click', function() {
+    //     map.setZoom(19);
+    //     map.setCenter({lat: 55.8747404, lng: -4.2931500});
+    //     this.setMap(null);
+    // });
 
-    marker2.addListener('click', function() {
-        map.setZoom(19);
-        map.setCenter({lat: 55.8747404, lng: -4.2931500});
-        this.setMap(null);
-    });
+}
 
+function showNearBy(marker) {
+    google.maps.event.addListener(marker, 'click', function() {
+        $(".recommendation-card").css("bottom","10%");
+        $(".menu-container").hide();
+        if(place.photos){
+            $(".place-info").html(
+                "<div class='image-wrapper'>" +
+                "<img class='place-image' src='"+place.photos[0].getUrl({'maxWidth': 1000, 'maxHeight': 300})+"'/>" +
+                "</div>" +
+                "<h1 class='place-name'>"+place.name+"</h1>"+
+                "<div class='rating'>"+
+                "<span>★</span><span>★</span><span>★</span><span>★</span><span>☆</span>"+
+                "</div>"+
+                "<p style='text-align: justify; padding: 10px'>Description of the place from Google Place API"+
+                " This is an amazing place for lunch"+
+                " Ranked in top 10 of Glasgow restaurants."+
+                " Some other nice words about the place.</p>"+
+                "<a class='btn get-directions' href='#'><i class='material-icons icon-direction'>directions</i><br/><p class='text-direction' >Get Direction</p></a>" +
+                "</div>"
+            );
+        }
+        $(".place-info").show();
+    });
 }
 
 function callback1(results, status) {
@@ -161,7 +202,7 @@ function createMarker(place,type) {
                 " This is an amazing place for lunch"+
                 " Ranked in top 10 of Glasgow restaurants."+
                 " Some other nice words about the place.</p>"+
-                "<a class='btn get-directions' href='#'><i class='material-icons icon-direction'>directions</i><br/><p class='text-direction' >Get Direction</p></a>" +
+                "<a class='btn get-directions' href='#'><i class='material-icons icon-direction'>stars</i><br/><p class='text-direction' style='margin-left: -14px' >Check In</p></a>" +
                 "</div>"
             );
         }

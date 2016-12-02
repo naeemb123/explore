@@ -17,6 +17,16 @@ $(document).ready(function () {
         }
     });
 
+    $( ".profile-window" ).swipe( {
+        //Generic swipe handler for all directions
+        swipeRight:function(event, direction, distance, duration, fingerCount, fingerData) {
+            // $(".place-info").hide();
+            // $(".menu-container").show();
+            // $(".recommendation-places").text("You swiped " + direction );
+            $('.profile-window').css('left','100%');
+        }
+    });
+
     function afterCss() {
         $(".place-info").hide();
         $(".menu-container").show();
@@ -31,6 +41,24 @@ $(document).ready(function () {
         $(".recommendation-card").css("bottom", "-70%");
         $(".place-info").hide();
         $(".menu-container").show();
+        $(".rest-button").show();
+        $(".my-location").show();
+    });
+
+    $('.my-location').click(function () {
+        initMap();
+        $(".my-location").hide();
+        $('.rest-button').hide();
+    });
+
+    $('.top').click(function () {
+        showRecommendations();
+        $(".my-location").show();
+    });
+
+    $('.near').click(function () {
+        showRestaurant_Recommendations();
+        $(".my-location").show();
     });
 
     $('#clubImg').click(function () {
@@ -38,9 +66,17 @@ $(document).ready(function () {
         $(".recommendation-card").css("bottom", "-70%");
         $(".place-info").hide();
         $(".menu-container").show();
+        $(".rest-button").show();
+        $(".my-location").show();
     });
 
     $('#cinemaImg').click(function () {
+        var service = new google.maps.places.PlacesService(map);
+        service.nearbySearch({
+            location: myLoc,
+            radius: 500,
+            type: ['movie_theater']
+        }, callback4);
         showMovie_Recommendations();
         $(".recommendation-card").css("bottom", "-70%");
         $(".place-info").hide();
@@ -48,6 +84,12 @@ $(document).ready(function () {
     });
 
     $('#coffeeImg').click(function () {
+        var service = new google.maps.places.PlacesService(map);
+        service.nearbySearch({
+            location: myLoc,
+            radius: 1000,
+            type: ['cafe']
+        }, callback3);
         showCafe_Recommendations();
         $(".recommendation-card").css("bottom", "-70%");
         $(".place-info").hide();
@@ -64,7 +106,7 @@ $(document).ready(function () {
         if(e.which == 13) {
             $("#searched-friend").append(
                 "<p style='margin-left: 20px; margin-top: 20px'>" +
-                "<i class='material-icons' style='font-size: 60px; color: #9c27b0;'>face</i><br/>Ben </p>"
+                "<i class='material-icons' style='font-size: 60px; color: #9c27b0;'>face</i><br/>Nayhall</p>"
             );
         }
     });
@@ -102,6 +144,16 @@ $(document).ready(function () {
         $('.profile-window').css('left','100%');
     });
 
+    $(".like-btn").click(function () {
+        $(".like-window").hide();
+    });
+
+    // $("#get-points").click(function () {
+    //     var start = new Date;
+    //     setInterval(function() {
+    //         $('#get-points-text').text(Math.round((start - new Date) / 1000, 0) + " Seconds");
+    //     }, 1000);
+    // });
 });
 
 // $(document).mouseup(function (e)
